@@ -1,8 +1,9 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 function PostCard({post}) {
     return(
-        <cardWrapper>
+        <CardWrapper to={`/${post.id}`}>
             <Thumbnail src={post.thumbnail} alt={post.title} />
             <Title>{post.title}</Title>
             <Summary>{post.summary}</Summary>
@@ -14,13 +15,16 @@ function PostCard({post}) {
                 </AuthorInfo> 
                 <LikeInfo><i class="fa-regular fa-heart"></i> {post.likes}</LikeInfo>
             </MetaRow>
-        </cardWrapper>
+        </CardWrapper>
     );
 }
 
-const CardWrapper = styled.div`
+const CardWrapper = styled(Link)`
+    display: block;
     width: 100%;
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
 `;
 
 const Thumbnail = styled.img`
