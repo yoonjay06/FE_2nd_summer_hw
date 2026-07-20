@@ -13,12 +13,13 @@ function MainPage() {
 }
 
 const GridWrapper = styled.div`
-    max-width: 1080px;
+    max-width: 1376px;
     min-width: 0;
     margin: 0 auto;
     padding: 40px 20px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, 320px);
+    justify-content: center;
     gap: 32px;
 `
 
