@@ -19,7 +19,7 @@ function DetailPage() {
                     <Separator>·</Separator>
                     <DateText>{post.date}</DateText>
                 </AuthorDate>
-                <LikeInfo>♡ {post.likes}</LikeInfo>
+                <LikeInfo><i class="fa-solid fa-heart"></i> {post.likes}</LikeInfo>
             </MetaRow>
             <Thumbnail src={post.thumbnail} alt={post.title} />
             <Content>{post.content}</Content>

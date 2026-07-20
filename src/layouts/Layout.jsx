@@ -8,6 +8,12 @@ function Layout() {
             <HeaderInner>
             <Logo to="/">velog</Logo>
             <RightArea>
+                <IconButton aria-label="알림">
+                    <i className="fa-regular fa-bell"></i>
+                </IconButton>
+                <IconButton aria-label="검색">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                </IconButton>
                 <LoginButton>로그인</LoginButton>
             </RightArea>
             </HeaderInner>
@@ -43,7 +49,26 @@ const Logo = styled.a.attrs({ href: '/' })`
 const RightArea = styled.div`
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
+`;
+
+const IconButton = styled.button`
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    color: #212529;
+    transition: background 0.2s;
+
+    &:hover {
+        background: #f1f3f5;
+    }
 `;
 
 const LoginButton = styled.button`
