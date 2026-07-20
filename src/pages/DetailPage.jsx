@@ -1,74 +1,93 @@
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import dummyData from "../data/dummy_data";
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import dummyData from '../data/dummy_data';
 
 function DetailPage() {
     const { postId } = useParams();
     const post = dummyData.find((item) => item.id === postId);
 
     if (!post) {
-        return <div>해당 게시글을 찾을 수 없습니다.</div>;
+    return <NotFound>해당 게시글을 찾을 수 없습니다.</NotFound>;
     }
-    
-    return(
+
+    return (
         <Wrapper>
-            <Thumbnail src={post.thumbnail} alt={post.title} />
             <Title>{post.title}</Title>
             <MetaRow>
                 <AuthorDate>
-                    {post.author.name} · {post.date}
+                    <AuthorName>{post.author.name}</AuthorName>
+                    <Separator>·</Separator>
+                    <DateText>{post.date}</DateText>
                 </AuthorDate>
                 <LikeInfo>♡ {post.likes}</LikeInfo>
             </MetaRow>
-            <Divider />
+            <Thumbnail src={post.thumbnail} alt={post.title} />
             <Content>{post.content}</Content>
         </Wrapper>
     );
 }
 
 const Wrapper = styled.div`
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 40px 20px;
-`;
-
-const Thumbnail = styled.img`
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 24px;
+    width: 768px;
+    max-width: 100%;
+    margin: 88px auto 0;
+    padding: 0 20px 64px;
 `;
 
 const Title = styled.h1`
-    font-size: 32px;
+    font-size: 48px;
     font-weight: 800;
-    line-height: 1.3;
-    margin-bottom: 16px;
+    color: #212529;
+    line-height: 72px;
+    margin-bottom: 32px;
 `;
 
 const MetaRow = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+`;  
+
+const AuthorDate = styled.div`
+    display: flex;
+    align-items: center;
 `;
 
-const AuthorDate = styled.span``;
+const AuthorName = styled.span`
+    font-size: 16px;
+    font-weight: 700;
+    color: #212529;
+`;
 
-const LikeInfo = styled.span``;
+const Separator = styled.span`
+    font-size: 16px;
+    color: #495057;
+    margin: 0 6px;
+`;
 
-const Divider = styled.hr`
-    border: none;
-    border-top: 1px solid #eee;
-    margin-bottom: 24px;
+const DateText = styled.span`
+    font-size: 16px;
+    color: #495057;
+`;
+
+const LikeInfo = styled.span`
+    font-size: 12px;
+    font-weight: 700;
+    color: #868e96;
+`;
+
+const Thumbnail = styled.img`
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 32px;
 `;
 
 const Content = styled.p`
-    font-size: 16px;
-    line-height: 1.8;
+    font-size: 18px;
+    line-height: 30.6px;
+    color: #212529;
+    margin-bottom: 18px;
     white-space: pre-line;
 `;
 
