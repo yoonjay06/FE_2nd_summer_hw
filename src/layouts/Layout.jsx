@@ -78,8 +78,10 @@ const LoginButton = styled.button`
     background: #212529;
     border: none;
     border-radius: 16px;
-    padding: 6px 16px;
+    padding: 1px 16px;
     cursor: pointer;
+    height: 32px;
+    width: 80px;
 `;
 
 export default Layout;

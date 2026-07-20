@@ -17,7 +17,8 @@ function PostCard({ post }) {
             <Footer>
                 <AuthorInfo>
                     <Avatar />
-                    <MetaText as="span">by {post.author.name}</MetaText>
+                    <ByText>by</ByText>
+                    <AuthorName as="span"> {post.author.name}</AuthorName>
                 </AuthorInfo>
                 <LikeInfo><i class="fa-solid fa-heart"></i> {post.likes}</LikeInfo>
             </Footer>
@@ -115,9 +116,24 @@ const Avatar = styled.div`
     background: #ddd;
 `;
 
-const LikeInfo = styled.span`
+const ByText = styled.span`
     font-size: 12px;
     color: #868e96;
+`;
+
+const AuthorName = styled.span`
+    font-size: 12px;
+    font-weight: 700;
+    color: #212529;
+`;
+
+const LikeInfo = styled.span`
+    font-size: 12px;
+    font-weight: 400;
+    color: #212529;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 `;
 
 const Footer = styled.div`
