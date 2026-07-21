@@ -60,6 +60,7 @@ const Thumbnail = styled.img`
 
 const Content = styled.div`
     padding: 16px;
+    height: 133px;
 `;
 
 const Title = styled.h4`

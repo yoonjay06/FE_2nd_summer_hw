@@ -69,7 +69,7 @@ const Wrapper = styled.nav`
 const TabList = styled.div`
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
 `;
 
 const TabItem = styled.span`
@@ -77,6 +77,7 @@ const TabItem = styled.span`
     display: flex;
     align-items: center;
     gap: 12px;
+    width: 100px;
     height: 24px;
     line-height: 24px;
     font-size: 18px;
