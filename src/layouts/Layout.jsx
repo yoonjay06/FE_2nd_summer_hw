@@ -113,6 +113,7 @@ const LoginButton = styled.button`
     cursor: pointer;
     height: 32px;
     width: 80px;
+    letter-spacing: 1px;
 `;
 
 export default Layout;
