@@ -1,6 +1,7 @@
 import { Link, Outlet, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import dummyData from '../data/dummy_data';
+import velogLogo from '../assets/velog-logo.svg'
 
 function Layout() {
     const { postId } = useParams();
@@ -15,9 +16,11 @@ function Layout() {
                     <>
                         <i className="fa-brands fa-vimeo"></i>
 
-                        누구보다 빠르게 남들과는 다르게
+                        {post.author.name}.log
                     </>
-                ) : ('velog')}
+                ) : (
+                    <LogoImage src={velogLogo} alt="velog" />
+                )}
             </Logo>
             <RightArea>
                 <IconButton aria-label="알림">
@@ -52,6 +55,9 @@ const HeaderInner = styled.div`
 `;
 
 const Logo = styled(Link)`
+    display: flex;
+    align-items: center;
+    height: 24px;   
     font-family: 'Baloo 2', var(--sans);
     font-size: 22px;
     font-weight: 500;
@@ -59,10 +65,16 @@ const Logo = styled(Link)`
     color: #212529;
     text-decoration: none;
     text-transform: lowercase;
+    gap: 12px;
 
-    display: flex;
-    align-items: center;
-    gap: 14px;
+    i{
+        font-size: 28px;
+    }
+`;
+
+const LogoImage = styled.img`
+    height: 24px;   
+    width: 71px;
 `;
 
 const RightArea = styled.div`

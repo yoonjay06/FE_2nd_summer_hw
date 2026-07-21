@@ -11,7 +11,7 @@ function PostCard({ post }) {
                 <Title>{post.title}</Title>
                 <Summary>{post.summary}</Summary>
                 <MetaText>
-                    {post.date} <Separator>·</Separator> {post.comments}개의 댓글
+                    {post.date}<Separator>·</Separator>{post.comments}개의 댓글
                 </MetaText>
             </Content>
             <Footer>

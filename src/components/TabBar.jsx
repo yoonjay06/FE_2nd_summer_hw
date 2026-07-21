@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 const TABS = [
@@ -7,7 +8,22 @@ const TABS = [
     { label: '피드', icon: 'fa-solid fa-rss' },
 ];
 
+const PERIOD_OPTIONS = ['오늘', '이번 주', '이번 달', '올해']
+
 function TabBar() {
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() =>{
+        function handleClickOutside(event) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
     return (
         <Wrapper>
             <TabList>
@@ -19,8 +35,22 @@ function TabBar() {
                 ))}  
             </TabList>
             <RightArea>
-                <PeriodButton>이번 주       <i className="fa-solid fa-chevron-down"></i></PeriodButton>
-                <MoreButton aria-label="더보기">⋮</MoreButton>
+                <DropdownWrapper ref={dropdownRef}>
+                    <PeriodButton onClick={() => setIsOpen((prev) => !prev)}>
+                        이번 주
+                        <i className={`fa-solid fa-sort-down ${isOpen ? 'open' : ''}`}></i>
+                    </PeriodButton>
+                    {isOpen && (
+                        <OptionList>
+                            {PERIOD_OPTIONS.map((option) => (
+                                <OptionItem key={option}>{option}</OptionItem>
+                            ))}
+                        </OptionList>
+                    )}
+                </DropdownWrapper>
+                <MoreButton aria-label="더보기">
+                    <i className="fa-solid fa-ellipsis-vertical"></i>
+                </MoreButton>
             </RightArea>
         </Wrapper>
     );
@@ -46,7 +76,7 @@ const TabItem = styled.span`
     position: relative;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 12px;
     height: 24px;
     line-height: 24px;
     font-size: 18px;
@@ -63,29 +93,78 @@ const TabItem = styled.span`
         height: 2px;
         background: ${(props) => (props.$active ? '#212529' : 'transparent')};
     }
-`;
+`;  
 
 const RightArea = styled.div`
     display: flex;
     align-items: center;
-    gap: 12px;
     height: 32px;
     width: 134px;
 `;
 
+const DropdownWrapper = styled.div`
+    position: relative;
+    margin-right: 10px;
+`;
+
 const PeriodButton = styled.button`
-    font-size: 14px;
+    width: 100px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    font-size: 0.9rem;
+    font-weight: 500;
     color: #495057;
     background: none;
     border: 1px solid #e9ecef;
     border-radius: 4px;
-    padding: 6px 10px;
+    padding: 0 8px;
     cursor: pointer;
+
+    i {
+        font-size: 14px;
+        transition: transform 0.15s ease-out;
+    }
+
+
+`;
+
+const OptionList = styled.ul`
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100px;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 4px;
+    list-style: none;
+    z-index: 10;
+`;
+
+const OptionItem = styled.li`
+    font-size: 14px;
+    color: #495057;
+    padding: 8px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+        background: #f8f9fa;
+    }
 `;
 
 const MoreButton = styled.button`
-    font-size: 18px;
-    color: #868e96;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #495057;
     background: none;
     border: none;
     cursor: pointer;
