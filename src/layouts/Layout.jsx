@@ -1,12 +1,24 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import dummyData from '../data/dummy_data';
 
 function Layout() {
+    const { postId } = useParams();
+    const post = postId ? dummyData.find((item) => item.id === postId) : null;
+
     return (
         <>
         <Header>
             <HeaderInner>
-            <Logo to="/">velog</Logo>
+            <Logo to="/">
+                {post ? (
+                    <>
+                        <i className="fa-brands fa-vimeo"></i>
+
+                        누구보다 빠르게 남들과는 다르게
+                    </>
+                ) : ('velog')}
+            </Logo>
             <RightArea>
                 <IconButton aria-label="알림">
                     <i className="fa-regular fa-bell"></i>
@@ -39,11 +51,18 @@ const HeaderInner = styled.div`
     align-items: center;
 `;
 
-const Logo = styled.a.attrs({ href: '/' })`
-    font-size: 20px;
-    font-weight: 800;
+const Logo = styled(Link)`
+    font-family: 'Baloo 2', var(--sans);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
     color: #212529;
     text-decoration: none;
+    text-transform: lowercase;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
 `;
 
 const RightArea = styled.div`
