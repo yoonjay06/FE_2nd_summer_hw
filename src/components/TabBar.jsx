@@ -78,7 +78,7 @@ const Wrapper = styled.nav`
 const TabList = styled.div`
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
 `;
 
 const TabItem = styled.span`
@@ -86,13 +86,14 @@ const TabItem = styled.span`
     display: flex;
     align-items: center;
     gap: 12px;
-    width: 100px;
+    width: auto;
     height: 24px;
     line-height: 24px;
     font-size: 18px;
     font-weight: ${(props) => (props.$active ? 700 : 400)};
     color: ${(props) => (props.$active ? '#212529' : '#868e96')};
     cursor: pointer;
+
 
     &::after {
         content: '';
